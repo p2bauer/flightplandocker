@@ -12,6 +12,6 @@ services:
     ports:
       - '5000:5000'
     volumes:
-     - ~/projects/fpdata/config:/app/config
-     - ~/projects/fpdata/db:/app/db
-     - ~/projects/fpdata/data:/app/data
+     - ~/projects/fpdata/config:/flightplan/config
+     - ~/projects/fpdata/db:/flightplan/db
+     - ~/projects/fpdata/data:/flightplan/data
