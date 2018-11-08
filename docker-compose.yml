@@ -1,0 +1,17 @@
+version: '2'
+services:
+
+  flightplanclient:
+    image: rbosworth/flightplan:client
+    container_name: flightplanclient
+    ports:
+      - '3000:3000'
+  flightplanserver:
+    image: rbosworth/flightplan:server
+    container_name: flightplanserver
+    ports:
+      - '5000:5000'
+    volumes:
+     - ~/projects/fpdata/config:/app/config
+     - ~/projects/fpdata/db:/app/db
+     - ~/projects/fpdata/data:/app/data
