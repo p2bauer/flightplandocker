@@ -2,7 +2,7 @@ FROM node:8-slim
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends python git g++ make chromium libgtk-3-0 libatk-bridge2.0-0 \
-	&& rm -rf /var/lib/apt/lists/* && git clone https://github.com/flightplan-tool/flightplan.git
+	&& rm -rf /var/lib/apt/lists/* && git clone https://github.com/p2bauer/flightplan.git
 WORKDIR flightplan
 RUN sed -i 's/localhost/flightplanserver/' client/package.json
 ENV PATH=/home/node/.npm-global/bin:$PATH
