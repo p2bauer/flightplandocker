@@ -2,12 +2,12 @@ version: '2'
 services:
 
   flightplanclient:
-    image: rbosworth/flightplan:client
+    image: p2bauer/flightplandocker:client
     container_name: flightplanclient
     ports:
       - '3000:3000'
   flightplanserver:
-    image: rbosworth/flightplan:server
+    image: p2bauer/flightplandocker:server
     container_name: flightplanserver
     ports:
       - '5000:5000'
