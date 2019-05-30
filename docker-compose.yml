@@ -6,6 +6,8 @@ services:
     container_name: flightplanclient
     ports:
       - '3000:3000'
+    depends_on:
+      - flightplanserver
   flightplanserver:
     image: p2bauer/flightplandocker:server
     container_name: flightplanserver
