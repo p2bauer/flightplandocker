@@ -58,6 +58,12 @@
                 {
                   "port": 3000
                 }
+              ], 
+              "environmentVariables": [
+                {
+                  "name": "HOST",
+                  "value": "HOSTNAME_REPLACEME"
+                }
               ]
             }
           }
