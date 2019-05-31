@@ -38,6 +38,12 @@
                 {
                   "port": 5000
                 }
+              ], 
+              "environmentVariables": [
+                {
+                  "name": "NODE_ENV",
+                  "value": "production"
+                }
               ]
             }
           },
@@ -61,8 +67,8 @@
               ], 
               "environmentVariables": [
                 {
-                  "name": "HOST",
-                  "value": "HOSTNAME_REPLACEME"
+                  "name": "NODE_ENV",
+                  "value": "production"
                 }
               ]
             }
