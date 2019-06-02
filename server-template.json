@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "containerGroupName": {
+            "defaultValue": "",
+            "type": "String"
+        }, 
+        "azureStorageAccountName": {
+            "defaultValue": "", 
+            "type": "String"
+        }, 
+        "azureFileShareNameConfig": {
+            "defaultValue": "", 
+            "type": "String"
+        }, 
+        "azureFileShareNameDb": {
+            "defaultValue": "", 
+            "type": "String"
+        }, 
+        "azureFileShareNameData": {
+            "defaultValue": "", 
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2018-04-01",
+            "name": "[parameters('containerGroupName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "containers": [
+                    {
+                        "name": "[parameters('containerGroupName')]",
+                        "properties": {
+                            "image": "p2bauer/flightplandocker:server",
+                            "ports": [
+                                {
+                                    "protocol": "TCP",
+                                    "port": 5000
+                                }
+                            ],
+                            "environmentVariables": [],
+                            "resources": {
+                                "requests": {
+                                    "memoryInGB": 1,
+                                    "cpu": 1
+                                }
+                            },
+                            "volumeMounts": [
+                                {
+                                    "name": "configmount",
+                                    "mountPath": "/usr/flightplan/config"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "ipAddress": {
+                    "ports": [
+                        {
+                            "protocol": "TCP",
+                            "port": 5000
+                        }
+                    ],
+                    "type": "Public",
+                    "dnsNameLabel": "[parameters('containerGroupName')]"
+                },
+                "osType": "Linux",
+                "volumes": [
+                    {
+                        "name": "configmount",
+                        "azureFile": {
+                            "shareName": "[parameters('azureFileShareNameConfig')]",
+                            "readOnly": false, 
+                            "storageAccountName": "[parameters('azureStorageAccountName')]", 
+                            "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('azureStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                        }
+                    }, 
+                    {
+                        "name": "datamount",
+                        "azureFile": {
+                            "shareName": "[parameters('azureFileShareNameData')]",
+                            "readOnly": false, 
+                            "storageAccountName": "[parameters('azureStorageAccountName')]", 
+                            "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('azureStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                        }
+                    }, 
+                    {
+                        "name": "dbmount",
+                        "azureFile": {
+                            "shareName": "[parameters('azureFileShareNameDb')]",
+                            "readOnly": false, 
+                            "storageAccountName": "[parameters('azureStorageAccountName')]", 
+                            "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('azureStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
