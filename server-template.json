@@ -4,27 +4,27 @@
     "parameters": {
         "containerGroupName": {
             "defaultValue": "",
-            "type": "String"
+            "type": "string"
         }, 
         "azureStorageAccountName": {
             "defaultValue": "", 
-            "type": "String"
+            "type": "string"
         }, 
         "azureFileShareNameConfig": {
             "defaultValue": "flightplanconfig", 
-            "type": "String"
+            "type": "string"
         }, 
         "azureFileShareNameDb": {
             "defaultValue": "flightplandb", 
-            "type": "String"
+            "type": "string"
         }, 
         "azureFileShareNameData": {
             "defaultValue": "flightplandata", 
-            "type": "String"
+            "type": "string"
         }, 
         "volumeMountPath": {
             "defaultValue": "/mnt/flightplan", 
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
