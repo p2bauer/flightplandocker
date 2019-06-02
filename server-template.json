@@ -11,15 +11,19 @@
             "type": "String"
         }, 
         "azureFileShareNameConfig": {
-            "defaultValue": "", 
+            "defaultValue": "flightplanconfig", 
             "type": "String"
         }, 
         "azureFileShareNameDb": {
-            "defaultValue": "", 
+            "defaultValue": "flightplandb", 
             "type": "String"
         }, 
         "azureFileShareNameData": {
-            "defaultValue": "", 
+            "defaultValue": "flightplandata", 
+            "type": "String"
+        }, 
+        "volumeMountPath": {
+            "defaultValue": "/mnt/flightplan", 
             "type": "String"
         }
     },
@@ -42,7 +46,12 @@
                                     "port": 5000
                                 }
                             ],
-                            "environmentVariables": [],
+                            "environmentVariables": [
+                                {
+                                    "name": "MOUNTPATH", 
+                                    "value": "[parameters('volumeMountPath')]"
+                                }
+                            ],
                             "resources": {
                                 "requests": {
                                     "memoryInGB": 1,
@@ -52,7 +61,15 @@
                             "volumeMounts": [
                                 {
                                     "name": "configmount",
-                                    "mountPath": "/usr/flightplan/config"
+                                    "mountPath": "[concat(parameters('volumeMountPath'), '/config')]"
+                                }, 
+                                {
+                                    "name": "datamount",
+                                    "mountPath": "[concat(parameters('volumeMountPath'), '/data')]"
+                                }, 
+                                {
+                                    "name": "dbmount",
+                                    "mountPath": "[concat(parameters('volumeMountPath'), '/db')]"
                                 }
                             ]
                         }
