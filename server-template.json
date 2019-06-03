@@ -14,10 +14,6 @@
             "defaultValue": "flightplanconfig", 
             "type": "string"
         }, 
-        "azureFileShareNameDb": {
-            "defaultValue": "flightplandb", 
-            "type": "string"
-        }, 
         "azureFileShareNameData": {
             "defaultValue": "flightplandata", 
             "type": "string"
@@ -66,10 +62,6 @@
                                 {
                                     "name": "datamount",
                                     "mountPath": "[concat(parameters('volumeMountPath'), '/data')]"
-                                }, 
-                                {
-                                    "name": "dbmount",
-                                    "mountPath": "[concat(parameters('volumeMountPath'), '/db')]"
                                 }
                             ]
                         }
@@ -101,15 +93,6 @@
                         "name": "datamount",
                         "azureFile": {
                             "shareName": "[parameters('azureFileShareNameData')]",
-                            "readOnly": false, 
-                            "storageAccountName": "[parameters('azureStorageAccountName')]", 
-                            "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('azureStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
-                        }
-                    }, 
-                    {
-                        "name": "dbmount",
-                        "azureFile": {
-                            "shareName": "[parameters('azureFileShareNameDb')]",
                             "readOnly": false, 
                             "storageAccountName": "[parameters('azureStorageAccountName')]", 
                             "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('azureStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
