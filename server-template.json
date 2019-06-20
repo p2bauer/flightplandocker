@@ -21,6 +21,22 @@
         "volumeMountPath": {
             "defaultValue": "/mnt/flightplan", 
             "type": "string"
+        }, 
+        "sqlServerName": {
+            "defaultValue": "", 
+            "type": "string"
+        }, 
+        "sqlDbName": {
+            "defaultValue": "", 
+            "type": "string"
+        }, 
+        "sqlUser": {
+            "defaultValue": "", 
+            "type": "string"
+        }, 
+        "sqlPassword": {
+            "defaultValue": "", 
+            "type": "string"
         }
     },
     "variables": {},
@@ -46,6 +62,22 @@
                                 {
                                     "name": "MOUNTPATH", 
                                     "value": "[parameters('volumeMountPath')]"
+                                }, 
+                                {
+                                    "name": "SQLCONNSTR", 
+                                    "value": "[parameters('sqlServerName')]"
+                                }, 
+                                {
+                                    "name": "SQLDBNAME", 
+                                    "value": "[parameters('sqlDbName')]"
+                                }, 
+                                {
+                                    "name": "SQLUSER", 
+                                    "value": "[parameters('sqlUser')]"
+                                }, 
+                                {
+                                    "name": "SQLPASS", 
+                                    "value": "[parameters('sqlPassword')]"
                                 }
                             ],
                             "resources": {
